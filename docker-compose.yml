@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  SqlServerDb:
+    container_name: SqlServerContainer
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    ports:
+        - 8002:1433
+    environment:
+        - ACCEPT_EULA=Y
+        - MSSQL_SA_PASSWORD=myStong_Password123#
+    networks:
+          - your-network
+
+  tekton.productapi:
+    image: ${DOCKER_REGISTRY-}tekton.productapi
+    environment:
+      ConnectionStrings:DefaultConnection: "Server=SqlServerDb; Database=TektonProduct; User Id=sa; Password=myStong_Password123#; Trust Server Certificate=True;"
+    build:
+      context: .
+      dockerfile: Tekton.ProductAPI/Dockerfile
+    depends_on:
+      - SqlServerDb
+    networks:
+          - your-network
+
+networks:
+    your-network:
+        name: your-network  
