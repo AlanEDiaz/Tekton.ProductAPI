@@ -24,7 +24,7 @@ This API manages permissions for employees. It was built using .NET Core 3.1 and
 ## Getting Started
 el proyecto utiliza entity framework con migrations y seeds de los objetos para una carga inicial
 solo se debe correr el comando
-dotnet ef database update
+***dotnet ef database update***
 si se desea correrlo en una db local.
 
 los log del proyecto se guardan en la carpeta Logs dentro de la misma se generan archivos de con nombre ex o inf dependiendo el tipo de log generado
